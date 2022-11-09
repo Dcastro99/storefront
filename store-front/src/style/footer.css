@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Allison&display=swap');
+.footerBox{
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-family: 'Allison', cursive;
+  padding: 10px;
+  color:#868889 ;
+  background-color: antiquewhite;
+  /* align-items: center; */
+  }
