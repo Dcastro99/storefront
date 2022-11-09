@@ -1,0 +1,76 @@
+import beanie from '../../images/beanie.jpg';
+import headphones from '../../images/headphones.jpg';
+import littleNightmare from '../../images/littleNightmares2.jpg';
+import knife from '../../images/knife.jpg';
+export const data = [
+  {
+    id: 0,
+    name: "Headphones",
+    description: "Audio-Technica",
+    category: "electronics",
+    price: "$200",
+    inventory: 200,
+    image: headphones,
+  },
+  {
+    id: 1,
+    name: "Beanie",
+    description: "one-size",
+    category: "apperal",
+    price: "$15",
+    inventory: 100,
+    image: beanie,
+  },
+  {
+    id: 2,
+    name: "Little Nightmares II",
+    description: "A Spooky Platformer Dripping With Tension And Dread",
+    category: "game",
+    price: "$60",
+    inventory: 50,
+    image: littleNightmare,
+  },
+  {
+    id: 3,
+    name: "Hunting knife",
+    description: "Small but useful",
+    category: "weapon",
+    price: "$6000",
+    inventory: 3,
+    image: knife,
+  },
+];
+
+export const categoryTabs = [
+  {
+    id: 0,
+    title: 'Electronics',
+    value: 'electronics',
+  },
+  {
+    id: 1,
+    title: 'Apperal',
+    value: 'apperal',
+  },
+  {
+    id: 2,
+    title: 'Game',
+    value: 'game',
+  },
+  {
+    id: 2,
+    title: 'Weapon',
+    value: 'weapon',
+  },
+]
+module.export = {
+  data,
+  categoryTabs,
+}
+
+
+
+
+
+
+
