@@ -4,7 +4,7 @@ import '../../style/footer.css'
 
 export default function Footer() {
   return (
-    <Box className='footerBox' maxWidth='l' sx={{ p: 2, border: '1px dashed grey', borderRadius: '7px ' }}>
+    <Box className='footerBox' maxWidth='l' sx={{ p: 2, borderRadius: '7px ' }}>
       &copy; 2022 Danny Castro
     </Box>
   )
