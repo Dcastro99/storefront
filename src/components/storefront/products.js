@@ -1,9 +1,70 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartSlice } from '../../store/cartSlice'
+import { Box, Button, Card, CardMedia, Stack, Typography } from '@mui/material';
 
-export default function products() {
+//------------ INLINE STYLING ----------------//
+
+const styles = {
+  mainBox: {
+    background: 'rgba(210, 210, 210, 0.777)',
+    borderRadius: '7px', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', padding: '20px'
+  },
+  box: {
+
+    padding: '20px'
+  },
+  card: {
+    margin: '20px',
+    padding: '20px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    // boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;',
+    boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgb(60, 201, 226,0.39) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;'
+  }
+}
+
+
+
+function Products() {
+  const dispatch = useDispatch();
+
+  //----------------- ADD TO ACRT HANDLER --------------------//
+
+  function handleAddToCart(data) {
+    // console.log('ADD_TO_CART', data)
+    dispatch(cartSlice.actions.addToCart(data))
+  }
+
+
+
+  const products = useSelector(state => state.products.categoryList);
+  let productArr = [];
+  console.log('arr', productArr)
+  if (products.length > 0) {
+    productArr = products.map(item => (
+      <Card key={item.id} sx={styles.card}>
+        <CardMedia image={item.image} sx={{ height: '180px', width: '180px', borderRadius: '4px' }} />
+        <Box sx={styles.box}>
+          <Typography>
+            {item.name}
+          </Typography>
+          <hr />
+          <Typography>
+            Cost: {item.price}
+          </Typography>
+          <Stack direction="row" spacing={2}>
+            <Button sx={{ color: 'salmon' }} value={item} onClick={() => handleAddToCart(item)}>Add to Cart</Button>
+            <Button sx={{ color: 'lightblue' }}>Details</Button>
+          </Stack>
+        </Box>
+
+
+      </Card>
+    ))
+  }
   return (
-    <div>
-
-    </div>
+    <Box sx={styles.mainBox}>
+      {productArr}
+    </Box>
   )
 }
+export default Products;

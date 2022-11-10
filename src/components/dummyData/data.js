@@ -25,7 +25,7 @@ export const data = [
     id: 2,
     name: "Little Nightmares II",
     description: "A Spooky Platformer Dripping With Tension And Dread",
-    category: "game",
+    category: "games",
     price: "$60",
     inventory: 50,
     image: littleNightmare,
@@ -34,7 +34,7 @@ export const data = [
     id: 3,
     name: "Hunting knife",
     description: "Small but useful",
-    category: "weapon",
+    category: "weapons",
     price: "$6000",
     inventory: 3,
     image: knife,
@@ -42,6 +42,11 @@ export const data = [
 ];
 
 export const categoryTabs = [
+  {
+    id: 9,
+    title: 'All',
+    value: 'all',
+  },
   {
     id: 0,
     title: 'Electronics',
@@ -54,13 +59,13 @@ export const categoryTabs = [
   },
   {
     id: 2,
-    title: 'Game',
-    value: 'game',
+    title: 'Games',
+    value: 'games',
   },
   {
     id: 2,
-    title: 'Weapon',
-    value: 'weapon',
+    title: 'Weapons',
+    value: 'weapons',
   },
 ]
 module.export = {

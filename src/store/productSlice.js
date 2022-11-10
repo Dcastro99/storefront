@@ -3,7 +3,7 @@ import { data as categoryList } from '../components/dummyData/data';
 
 const initialState = {
   category: '',
-  categoryList,
+  categoryList
 }
 
 export const productSlice = createSlice({
@@ -13,7 +13,7 @@ export const productSlice = createSlice({
     selectCategory(state, action) {
       console.log('action.payload', action.payload);
       state.category = action.payload;
-      state.catagoryList = state.category === undefined ? categoryList : categoryList.filter
+      state.categoryList = state.category === 'all' ? categoryList : categoryList.filter
         ((x) => x.category === state.category);
     },
   }
