@@ -20,7 +20,7 @@ function Categories() {
       <Typography sx={{ padding: '10px' }} variant="h2"> Browse our Categories</Typography>
       <Tabs TabIndicatorProps={{ style: { backgroundColor: 'salmon' } }} sx={{
         "& button": { borderRadius: 2 },
-        "& button:hover": { backgroundColor: "lightgrey" },
+        // "& button:hover": { backgroundColor: "" },
         "& button:focus": { color: "salmon" },
         "& button:active": { color: "black" }
       }} value={currentTabs} onChange={handleCategoryPicked}>
