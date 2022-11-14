@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartSlice } from '../../store/cartSlice'
+import { cartSlice } from '../../store/cartSlice';
+// import { detailSlice } from '../../store/detailSlice';
+import { showDetail } from '../../store/detailSlice'
 import { Box, Button, Card, CardMedia, Stack, Typography } from '@mui/material';
 
 //------------ INLINE STYLING ----------------//
@@ -30,16 +32,23 @@ function Products() {
   //----------------- ADD TO ACRT HANDLER --------------------//
 
   function handleAddToCart(data) {
-    // console.log('ADD_TO_CART', data)
     dispatch(cartSlice.actions.addToCart(data))
+  }
+
+  function handleShowItem(data) {
+    dispatch(showDetail(data))
   }
 
 
 
+
   const products = useSelector(state => state.products.categoryList);
+
   let productArr = [];
+
   console.log('arr', productArr)
   if (products.length > 0) {
+
     productArr = products.map(item => (
       <Card key={item.id} sx={styles.card}>
         <CardMedia image={item.image} sx={{ height: '180px', width: '180px', borderRadius: '4px' }} />
@@ -51,9 +60,10 @@ function Products() {
           <Typography>
             Cost: {item.price}
           </Typography>
+          <>````````````````````````</>
           <Stack direction="row" spacing={2}>
             <Button sx={{ color: 'salmon' }} value={item} onClick={() => handleAddToCart(item)}>Add to Cart</Button>
-            <Button sx={{ color: 'lightblue' }}>Details</Button>
+            <Button href={`/details/${item.id}`} sx={{ color: 'lightblue' }} value={item} onClick={() => handleShowItem(item)}>Details</Button>
           </Stack>
         </Box>
 

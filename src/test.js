@@ -1,40 +1,28 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
+// import * as React from 'react';
+// import Tabs from '@mui/material/Tabs';
+// import Tab from '@mui/material/Tab';
+// import Box from '@mui/material/Box';
 
-export default function FolderList() {
-  return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <BeachAccessIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
-    </List>
-  );
-}
+// export default function ColorTabs() {
+//   const [value, setValue] = React.useState('one');
+
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
+
+//   return (
+//     <Box sx={{ width: '100%' }}>
+//       <Tabs
+//         value={value}
+//         onChange={handleChange}
+//         textColor="secondary"
+//         indicatorColor="secondary"
+//         aria-label="secondary tabs example"
+//       >
+//         <Tab value="one" label="Item One" />
+//         <Tab value="two" label="Item Two" />
+//         <Tab value="three" label="Item Three" />
+//       </Tabs>
+//     </Box>
+//   );
+// }

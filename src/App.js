@@ -14,10 +14,11 @@ function App() {
       <Box sx={{ position: 'relative' }}>
         <Header />
         <SimpleCart />
+        {/* <Details /> */}
         <Routes>
           <>
             <Route path='/' element={<Storefront />} />
-            <Route path='/details' element={<Details />} />
+            <Route path='/details/:id' element={<Details />} />
             <Route path='/checkout' element={<Checkout />} />
           </>
         </Routes>

@@ -4,7 +4,7 @@ import Categories from './categories'
 import CurrentCategory from './current-catagory'
 import Products from './products'
 
-import '../../style/storefront.css'
+import '../../assets/style/storefront.css'
 
 export default function storefront() {
   return (
