@@ -5,6 +5,7 @@ Virtual Store Phase 1: For this assignment, you will be starting the process of 
 ## Table of contents
 
 - [Lab36](./labs/lab36.md)
+- [Lab37](./labs/lab37.md)
 
 ## Virtual Store
 
