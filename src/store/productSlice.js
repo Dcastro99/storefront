@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { data as categoryList } from '../components/dummyData/data';
+import { data as categoryList } from '../assets/dummyData/data';
 
 const initialState = {
   category: '',
@@ -11,7 +11,6 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     selectCategory(state, action) {
-      console.log('action.payload', action.payload);
       state.category = action.payload;
       state.categoryList = state.category === 'all' ? categoryList : categoryList.filter
         ((x) => x.category === state.category);

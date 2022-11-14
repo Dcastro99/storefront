@@ -1,0 +1,21 @@
+#line-1 hr{
+/* box-sizing: border-box; */
+border-left: 0px;
+border-right: 0px;
+  /* background-color: aqua; */
+  /* height:'1px'; */
+  width: 100%;
+}
+#line-1 {
+  background-color: rgb(222, 221, 221);
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: 2px;
+}
+#mainBox{
+  background-color: salmon;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: 5px;
+}
