@@ -5,7 +5,7 @@ import Details from './components/products/details'
 import Header from './components/header/index.js'
 import Footer from './components/footer/index.js'
 
-// ---- here we go----//
+
 
 function App() {
   return (
