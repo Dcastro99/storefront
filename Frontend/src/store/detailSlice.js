@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   detailItems: [],
+
 }
 
 export const detailSlice = createSlice({
@@ -17,7 +18,5 @@ export const detailSlice = createSlice({
   }
 });
 export const { showDetail } = detailSlice.actions;
-
-export const selectedItem = (state) => state.detail;
 
 export default detailSlice.reducer;

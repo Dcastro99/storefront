@@ -1,11 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartSlice } from '../../store/cartSlice';
+import { productSlice } from '../../store/productSlice';
 // import { detailSlice } from '../../store/detailSlice';
 import { showDetail } from '../../store/detailSlice'
 import { Box, Button, Card, CardMedia, Stack, Typography } from '@mui/material';
 
 //------------ INLINE STYLING ----------------//
+
 
 const styles = {
   mainBox: {
@@ -29,27 +31,39 @@ const styles = {
 function Products() {
   const dispatch = useDispatch();
 
+
+
   //----------------- ADD TO ACRT HANDLER --------------------//
 
   function handleAddToCart(data) {
-    dispatch(cartSlice.actions.addToCart(data))
+    console.log('id?', data.id)
+    if (data.inventory === 0) {
+      console.log(data.name, 'Out of Stock')
+    } else {
+      dispatch(productSlice.actions.productDecrement(data))
+      dispatch(cartSlice.actions.addToCart(data))
+    }
   }
 
   function handleShowItem(data) {
+    console.log('headed to deatil page', data)
     dispatch(showDetail(data))
   }
 
 
+  const products = useSelector(state => state.products.productSelected);
 
 
-  const products = useSelector(state => state.products.categoryList);
+  console.log('new id', products)
 
   let productArr = [];
 
-  console.log('arr', productArr)
+  // console.log('arr', productArr)
   if (products.length > 0) {
 
     productArr = products.map(item => (
+
+
       <Card key={item.id} sx={styles.card}>
         <CardMedia image={item.image} sx={{ height: '180px', width: '180px', borderRadius: '4px' }} />
         <Box sx={styles.box}>
@@ -71,6 +85,8 @@ function Products() {
       </Card>
     ))
   }
+
+
   return (
     <Box sx={styles.mainBox}>
       {productArr}

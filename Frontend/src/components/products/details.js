@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { productSlice } from '../../store/productSlice';
 import { cartSlice } from '../../store/cartSlice';
 import { useSelector } from 'react-redux'
 import { Box, Button, Card, CardMedia, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../../assets/style/detail.css'
+
 
 // const saved = JSON.parse(localStorage.getItem('detailedPageItem'))
 // console.log('SAVED STUFF', saved)
@@ -13,9 +15,15 @@ function Details() {
   const dispatch = useDispatch();
 
   function handleAddToCart(data) {
-    // console.log('ADD_TO_CART', data)
-    dispatch(cartSlice.actions.addToCart(data))
+    if (data.inventory === 0) {
+      console.log(data.name, 'Out of Stock')
+    } else {
+      dispatch(productSlice.actions.productDecrement(data))
+      dispatch(cartSlice.actions.addToCart(data))
+    }
+
   }
+
 
 
 
@@ -25,7 +33,9 @@ function Details() {
   console.log('displayResults', singleDetailItem)
   if (singleDetailItem.length > 0) {
     results = singleDetailItem.map(item => (
+
       <div id='MainDiv'>
+
         <Box sx={{ fontSize: '60px' }}> {item.name}</Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '50px', width: '600px' }}>
           <Card key={item.id} sx={{ padding: '30px', borderRadius: '7px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} elevation={5}>
@@ -72,9 +82,12 @@ function Details() {
               <Typography sx={{ fontWeight: 'bold', fontSize: '15px' }}>Inventory</Typography>
             </AccordionSummary>
             <AccordionDetails >
-              <Typography id='inStock' >
-                <p >In Stock:</p>  <p id='stockText'>{item.inventory}</p>
-              </Typography>
+              {item.inventory >= 1 ?
+                <Typography id='inStock' >
+                  <p >In Stock:</p>  <p id='stockText'>{item.inventory}</p>
+                </Typography> : <Typography id='inStock' >
+                  <p >Out of Stock:</p>
+                </Typography>}
             </AccordionDetails>
           </Accordion>
         </Box >

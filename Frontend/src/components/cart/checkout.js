@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography, Button, Paper, Grid, TextField } from '@mui/material';
 import { cartSlice } from '../../store/cartSlice';
+import { productIncrement } from '../../store/productSlice'
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import '../../assets/style/checkout.css'
 
@@ -9,7 +10,9 @@ function Checkout() {
   const dispatch = useDispatch();
 
   function deleteItem(id) {
+    // console.log('delete cart is working', id)
     dispatch(cartSlice.actions.deleteItem(id))
+    dispatch(productIncrement(id))
   }
 
   const cartItems = useSelector(state => state.cart.cartItems);
@@ -30,7 +33,7 @@ function Checkout() {
               ${item.price}
             </Typography>
           </Box>
-          <Button sx={{ padding: '10px', borderRadius: '7px' }} onClick={() => deleteItem(item.id)}><DeleteTwoTone sx={{
+          <Button sx={{ padding: '10px', borderRadius: '7px' }} onClick={() => deleteItem(item)}><DeleteTwoTone sx={{
             color: 'salmon', "& button:focus": { color: "salmon" },
             "& button:active": { color: "black" }
           }} /></Button>
