@@ -1,9 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { data as categoryList } from '../assets/dummyData/data';
+import { data as allProducts } from '../assets/dummyData/data';
+import Chance from 'chance';
+const chance = new Chance();
+
+
+
 
 const initialState = {
+  detailItems: [],
+  productSelected: allProducts,
   category: '',
-  categoryList
+  allProducts,
+  inventory: ''
 }
 
 export const productSlice = createSlice({
@@ -11,13 +19,45 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     selectCategory(state, action) {
+
       state.category = action.payload;
-      state.categoryList = state.category === 'all' ? categoryList : categoryList.filter
+
+      state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
     },
+
+
+    productDecrement(state, action) {
+
+      let item = state.allProducts.find(x => x.id === action.payload.id);
+      item.inventory--;
+      item.id = chance.bb_pin()
+      state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
+        ((x) => x.category === state.category);
+
+
+    },
+
+    productIncrement(state, action) {
+      let item = state.allProducts.find(x => x.id === action.payload.id);
+      item.inventory++;
+
+      state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
+        ((x) => x.category === state.category);
+
+    },
+
+    showDetail(state, action) {
+      state.detailItems.push(action.payload);
+    },
+
+
+
   }
 });
 
-export const { selectCategory } = productSlice.actions;
+export const { productIncrement } = productSlice.actions;
+export const { showDetail } = productSlice.actions;
+export const { selectCategory, productDecrement } = productSlice.actions;
 
 export default productSlice.reducer;
