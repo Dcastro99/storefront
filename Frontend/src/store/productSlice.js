@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { data as allProducts } from '../assets/dummyData/data';
-import Chance from 'chance';
-const chance = new Chance();
+
 
 
 
@@ -31,7 +30,6 @@ export const productSlice = createSlice({
 
       let item = state.allProducts.find(x => x.id === action.payload.id);
       item.inventory--;
-      item.id = chance.bb_pin()
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
 
@@ -39,7 +37,7 @@ export const productSlice = createSlice({
     },
 
     productIncrement(state, action) {
-      let item = state.allProducts.find(x => x.id === action.payload.id);
+      let item = state.allProducts.find(x => x.name === action.payload.name);
       item.inventory++;
 
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter

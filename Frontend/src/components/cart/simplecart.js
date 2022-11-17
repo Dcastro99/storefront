@@ -9,14 +9,17 @@ import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import '../../assets/style/simpleCart.css'
 
 
+
 function Simplecart() {
   const dispatch = useDispatch();
 
 
   const cartItems = useSelector(state => state.cart.cartItems);
-
+  console.log('IN CART!', cartItems)
   function deleteItem(item) {
     // console.log('delete cart is working', item)
+
+
     dispatch(cartSlice.actions.deleteItem(item))
     dispatch(productIncrement(item))
   }

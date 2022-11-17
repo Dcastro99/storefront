@@ -36,7 +36,8 @@ function Products() {
   //----------------- ADD TO ACRT HANDLER --------------------//
 
   function handleAddToCart(data) {
-    console.log('id?', data.id)
+
+
     if (data.inventory === 0) {
       console.log(data.name, 'Out of Stock')
     } else {
@@ -54,7 +55,7 @@ function Products() {
   const products = useSelector(state => state.products.productSelected);
 
 
-  console.log('new id', products)
+
 
   let productArr = [];
 

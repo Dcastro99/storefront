@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import Chance from 'chance';
-// const chance = new Chance();
+import Chance from 'chance';
+const chance = new Chance();
 
 
 const initialState = {
   count: 0,
-
   cartItems: [],
 
 }
@@ -15,9 +14,19 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-      console.log('cart item', action.payload)
-      if (action.payload.inventory !== 'out of stock') {
-        state.cartItems.push(action.payload);
+
+      const item = {
+        id: chance.bb_pin(),
+        name: action.payload.name,
+        description: action.payload.description,
+        category: action.payload.category,
+        price: action.payload.price,
+        inventory: action.payload.inventory,
+        image: action.payload.image
+      }
+
+      if (action.payload.inventory !== 'Sold Out') {
+        state.cartItems.push(item);
         state.count = state.cartItems.length;
       }
 
@@ -29,7 +38,7 @@ export const cartSlice = createSlice({
 
       state.cartItems = state.cartItems.filter(x => x.id !== itemToBeDeleted)
       state.count = state.cartItems.length;
-      // state.count -= 1;
+
     }
 
 
