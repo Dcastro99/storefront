@@ -86,7 +86,7 @@ function Details() {
                 <Typography id='inStock' >
                   <p >In Stock:</p>  <p id='stockText'>{item.inventory}</p>
                 </Typography> : <Typography id='inStock' >
-                  <p >Out of Stock:</p>
+                  <p id='outOfStock'>Sold Out</p>
                 </Typography>}
             </AccordionDetails>
           </Accordion>

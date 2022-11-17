@@ -5,7 +5,7 @@ import { cartSlice } from '../../store/cartSlice';
 import { productIncrement } from '../../store/productSlice'
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import '../../assets/style/checkout.css'
-/// ----- lol ---- /?
+
 function Checkout() {
   const dispatch = useDispatch();
 
