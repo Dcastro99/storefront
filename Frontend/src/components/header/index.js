@@ -9,7 +9,7 @@ export default function Header() {
 
 
 
-  console.log('count', cartCount)
+  // console.log('count', cartCount)
 
   const clearLocal = (e) => {
     localStorage.removeItem('persist:detail');

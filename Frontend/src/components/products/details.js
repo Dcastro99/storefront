@@ -30,7 +30,7 @@ function Details() {
   const singleDetailItem = useSelector(state => state.detail.detailItems);
   // const singleDetailItem = JSON.parse(localStorage.getItem("detailedPageItem"))
   let results = [];
-  console.log('displayResults', singleDetailItem)
+  // console.log('displayResults', singleDetailItem)
   if (singleDetailItem.length > 0) {
     results = singleDetailItem.map(item => (
 
@@ -38,7 +38,7 @@ function Details() {
 
         <Box sx={{ fontSize: '60px' }}> {item.name}</Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginTop: '50px', width: '600px' }}>
-          <Card key={item.id} sx={{ padding: '30px', borderRadius: '7px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} elevation={5}>
+          <Card key={item._id} sx={{ padding: '30px', borderRadius: '7px', display: 'flex', flexDirection: 'column', alignItems: 'center' }} elevation={5}>
             <CardMedia image={item.image} sx={{ height: '500px', width: '500px', borderRadius: '4px' }} />
             <div id='detailInfo'>
               <Typography sx={{ fontWeight: 'bold', fontSize: '20px' }}>

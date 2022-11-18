@@ -11,7 +11,7 @@ export const detailSlice = createSlice({
   reducers: {
 
     showDetail(state, action) {
-      console.log('action.payload-DETAIL', action.payload);
+      // console.log('action.payload-DETAIL', action.payload);
       state.detailItems.push(action.payload);
     },
 

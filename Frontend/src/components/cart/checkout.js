@@ -16,7 +16,7 @@ function Checkout() {
   }
 
   const cartItems = useSelector(state => state.cart.cartItems);
-  console.log('items in checkout---->', cartItems)
+  // console.log('items in checkout---->', cartItems)
   const total = cartItems.reduce((total, items) => total + items.price, 0)
 
 

@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
     addToCart(state, action) {
 
       const item = {
-        id: chance.bb_pin(),
+        _id: chance.bb_pin(),
         name: action.payload.name,
         description: action.payload.description,
         category: action.payload.category,
@@ -34,9 +34,9 @@ export const cartSlice = createSlice({
 
     deleteItem(state, action) {
       console.log('delete item', action.payload)
-      let itemToBeDeleted = action.payload.id;
+      let itemToBeDeleted = action.payload._id;
 
-      state.cartItems = state.cartItems.filter(x => x.id !== itemToBeDeleted)
+      state.cartItems = state.cartItems.filter(x => x._id !== itemToBeDeleted)
       state.count = state.cartItems.length;
 
     }
