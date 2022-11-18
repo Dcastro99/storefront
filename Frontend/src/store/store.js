@@ -5,6 +5,7 @@ import detailReducer from './detailSlice'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
+
 const presistCartConfig = {
   key: 'cart',
   storage
@@ -29,7 +30,8 @@ export const store = configureStore({
   reducer: {
     products: presistedProductReducer,
     cart: presistedCartReducer,
-    detail: presistedDetailReducer
+    detail: presistedDetailReducer,
+
   },
 });
 

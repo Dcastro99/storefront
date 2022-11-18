@@ -16,6 +16,7 @@ function Categories() {
   const [currentTabs, setCurrentTabs] = useState('all');
 
   const handleCategoryPicked = (e, value) => {
+    console.log('WHAT CAT AM I?', value)
     setCurrentTabs(value);
     dispatch(productSlice.actions.selectCategory(value));
 

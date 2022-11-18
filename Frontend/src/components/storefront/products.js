@@ -47,14 +47,15 @@ function Products() {
   }
 
   function handleShowItem(data) {
-    console.log('headed to deatil page', data)
+    // console.log('headed to deatil page', data)
     dispatch(showDetail(data))
   }
 
 
+
   const products = useSelector(state => state.products.productSelected);
 
-
+  console.log('all products front', products)
 
 
   let productArr = [];
@@ -65,7 +66,7 @@ function Products() {
     productArr = products.map(item => (
 
 
-      <Card key={item.id} sx={styles.card}>
+      <Card key={item._id} sx={styles.card}>
         <CardMedia image={item.image} sx={{ height: '180px', width: '180px', borderRadius: '4px' }} />
         <Box sx={styles.box}>
           <Typography>
@@ -78,7 +79,7 @@ function Products() {
           <>````````````````````````</>
           <Stack direction="row" spacing={2}>
             <Button sx={{ color: 'salmon' }} value={item} onClick={() => handleAddToCart(item)}>Add to Cart</Button>
-            <Button href={`/details/${item.id}`} sx={{ color: 'lightblue' }} value={item} onClick={() => handleShowItem(item)}>Details</Button>
+            <Button href={`/details/${item._id}`} sx={{ color: 'lightblue' }} value={item} onClick={() => handleShowItem(item)}>Details</Button>
           </Stack>
         </Box>
 

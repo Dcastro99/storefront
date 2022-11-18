@@ -15,7 +15,6 @@ function Simplecart() {
 
 
   const cartItems = useSelector(state => state.cart.cartItems);
-  console.log('IN CART!', cartItems)
   function deleteItem(item) {
     // console.log('delete cart is working', item)
 
@@ -35,9 +34,9 @@ function Simplecart() {
 
   if (cartItems.length > 0) {
     cartArr = cartItems.map(item => (
-      <Card key={item.id} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: '7px', padding: '10px', minWidth: '300px' }}>
+      <Card key={item._id} sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: '7px', padding: '10px', minWidth: '300px' }}>
         <Box >
-          <Link href={`/details/${item.id}`} value={item} onClick={() => handleShowItem(item)} sx={{ color: 'grey' }} >
+          <Link href={`/details/${item._id}`} value={item} onClick={() => handleShowItem(item)} sx={{ color: 'grey' }} >
             {item.name}
           </Link>
         </Box>
