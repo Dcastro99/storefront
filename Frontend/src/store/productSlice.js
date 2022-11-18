@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { data as allProducts } from '../assets/dummyData/data';
 import axios from 'axios';
 // const allProducts = [];
 const url = process.env.REACT_APP_HEROKU_URL;
