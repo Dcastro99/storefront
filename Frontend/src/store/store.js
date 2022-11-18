@@ -4,6 +4,7 @@ import cartReducer from './cartSlice'
 import detailReducer from './detailSlice'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import logger from 'redux-logger'
 
 const presistCartConfig = {
   key: 'cart',
@@ -29,7 +30,8 @@ export const store = configureStore({
   reducer: {
     products: presistedProductReducer,
     cart: presistedCartReducer,
-    detail: presistedDetailReducer
+    detail: presistedDetailReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   },
 });
 
