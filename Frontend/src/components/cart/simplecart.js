@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { store } from '../../store/store'
 import { Box, Card, Button, Link } from '@mui/material';
 import { showDetail } from '../../store/detailSlice'
-import { productIncrement } from '../../store/productSlice'
+import { productIncrement, postData } from '../../store/productSlice'
 import { cartSlice } from '../../store/cartSlice';
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import '../../assets/style/simpleCart.css'
@@ -13,14 +12,16 @@ import '../../assets/style/simpleCart.css'
 function Simplecart() {
   const dispatch = useDispatch();
 
+  const newItem = useSelector(state => state.products.updatedItem);
 
   const cartItems = useSelector(state => state.cart.cartItems);
   function deleteItem(item) {
     // console.log('delete cart is working', item)
 
 
-    dispatch(cartSlice.actions.deleteItem(item))
     dispatch(productIncrement(item))
+    dispatch(cartSlice.actions.deleteItem(item))
+    dispatch(postData(newItem))
   }
 
   function handleShowItem(data) {

@@ -13,26 +13,47 @@ export const getStoreItems = createAsyncThunk('products/getStoreItems', async (i
 
     let arr = [];
     for (const items of res.data) {
-      // allProducts.push(items)
       arr.push(items)
     }
-    console.log('RESPONSE FROM MONGO', arr)
+    // console.log('RESPONSE FROM MONGO', arr)
     return arr;
   } catch (error) {
     return thunkAPI.rejectWithValue('something went wrong');
   }
 });
 
-// console.log('ok fine', allProducts)
+export const postData = createAsyncThunk(
+  "type/postData",
+  async (data) => {
+    try {
+
+      const config = {
+        method: 'put',
+        // baseURL: 'http://localhost:3080',
+        baseURL: process.env.REACT_APP_HEROKU_URL,
+        url: `/item/${data._id}`,
+        data: data,
+      };
+      await axios(config);
+
+      // console.log('response From AXIOS POST', res)
+      // return res.data;
+    } catch (err) {
+      console.error(err)
+    }
+  }
+);
+
+
 
 
 const initialState = {
   detailItems: [],
   productSelected: [],
-  // allProducts,
   category: '',
   allProducts: [],
   isLoading: true,
+  updatedItem: ''
 }
 
 
@@ -44,7 +65,7 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     selectCategory(state, action) {
-      console.log('catTags in productslice', action.payload)
+      // console.log('catTags in productslice', action.payload)
       state.category = action.payload;
       // state.productSelected = state.category === 'all' ? state.productSelected : state.productSelected.filter
       //   ((x) => x.category === state.category);
@@ -56,9 +77,11 @@ export const productSlice = createSlice({
 
 
     productDecrement(state, action) {
-      console.log('item', action.payload)
+      // console.log('item', action.payload)
       let item = state.allProducts.find(x => x._id === action.payload._id);
       item.inventory--;
+      state.updatedItem = item;
+
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
         // state.allProducts = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
@@ -69,31 +92,30 @@ export const productSlice = createSlice({
     productIncrement(state, action) {
       let item = state.allProducts.find(x => x.name === action.payload.name);
       item.inventory++;
-
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
         // state.allProducts = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
 
+      state.updatedItem = item;
     },
 
     showDetail(state, action) {
       state.detailItems.push(action.payload);
     },
   },
-  extraReducers: {
-    [getStoreItems.pending]: (state) => {
+  extraReducers: (builder) => {
+    builder.addCase(getStoreItems.pending, (state) => {
       state.isLoading = true;
-    },
-    [getStoreItems.fulfilled]: (state, action) => {
-      console.log('fullfilled action!', action.payload);
+    })
+    builder.addCase(getStoreItems.fulfilled, (state, action) => {
       state.isLoading = false;
       state.productSelected = action.payload;
       state.allProducts = action.payload;
-    },
-    [getStoreItems.rejected]: (state, action) => {
-      console.log('Thunk action', action);
+    })
+    builder.addCase(getStoreItems.rejected, (state) => {
       state.isLoading = false;
-    },
+    })
+
   },
 
 });

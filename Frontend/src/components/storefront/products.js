@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartSlice } from '../../store/cartSlice';
-import { productSlice } from '../../store/productSlice';
-// import { detailSlice } from '../../store/detailSlice';
+import { productSlice, postData } from '../../store/productSlice';
 import { showDetail } from '../../store/detailSlice'
 import { Box, Button, Card, CardMedia, Stack, Typography } from '@mui/material';
 
@@ -30,32 +29,55 @@ const styles = {
 
 function Products() {
   const dispatch = useDispatch();
+  // const [updated, setUpdate] = useState('');
+  const newItem = useSelector(state => state.products.updatedItem);
+  // let x = updated.inventory;
+  // const value = x--;
+
+  // const increment = {
+  //   _id: updated._id,
+  //   name: updated.name,
+  //   image: updated.image,
+  //   inventory: `${x}`,
+  //   price: updated.price,
+  //   description: updated.description,
+  //   caegory: updated.category
+  // }
+
+  // console.log('HELLOOOOO??', increment)
+  function getNewItem() {
 
 
+    dispatch(postData(newItem))
+  }
 
   //----------------- ADD TO ACRT HANDLER --------------------//
 
   function handleAddToCart(data) {
-
-
+    console.log('sending to product Slice!!!', data)
     if (data.inventory === 0) {
       console.log(data.name, 'Out of Stock')
+
     } else {
+      // setUpdate(data)
+
       dispatch(productSlice.actions.productDecrement(data))
       dispatch(cartSlice.actions.addToCart(data))
-    }
-  }
 
+    }
+
+    getNewItem()
+  }
+  // console.log('newITEM!!', newItem)
   function handleShowItem(data) {
     // console.log('headed to deatil page', data)
     dispatch(showDetail(data))
   }
 
 
-
   const products = useSelector(state => state.products.productSelected);
 
-  console.log('all products front', products)
+  // console.log('all products front', products)
 
 
   let productArr = [];
