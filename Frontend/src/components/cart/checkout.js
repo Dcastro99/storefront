@@ -2,17 +2,20 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Typography, Button, Paper, Grid, TextField } from '@mui/material';
 import { cartSlice } from '../../store/cartSlice';
-import { productIncrement } from '../../store/productSlice'
+import { productIncrement, postData } from '../../store/productSlice'
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
 import '../../assets/style/checkout.css'
 
 function Checkout() {
   const dispatch = useDispatch();
 
+  const newItem = useSelector(state => state.products.updatedItem);
+
   function deleteItem(id) {
     // console.log('delete cart is working', id)
-    dispatch(cartSlice.actions.deleteItem(id))
     dispatch(productIncrement(id))
+    dispatch(cartSlice.actions.deleteItem(id))
+    dispatch(postData(newItem))
   }
 
   const cartItems = useSelector(state => state.cart.cartItems);
