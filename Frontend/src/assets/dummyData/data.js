@@ -9,7 +9,7 @@ import recordPlayer from '../images/recordPlayer.jpg';
 import Chance from 'chance';
 const chance = new Chance();
 
-
+//
 
 
 export const data = [
