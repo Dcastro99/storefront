@@ -5,20 +5,19 @@ import { showDetail } from '../../store/detailSlice'
 import { productIncrement, postData } from '../../store/productSlice'
 import { cartSlice } from '../../store/cartSlice';
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
-import '../../assets/style/simpleCart.css'
+
 
 
 
 function Simplecart() {
   const dispatch = useDispatch();
 
+  //----------PULLING FROM SLICE----------//
   const newItem = useSelector(state => state.products.updatedItem);
-
   const cartItems = useSelector(state => state.cart.cartItems);
+
+  //----------DELETE (also sends to MONGO-DB)----------//
   function deleteItem(item) {
-    // console.log('delete cart is working', item)
-
-
     dispatch(productIncrement(item))
     dispatch(cartSlice.actions.deleteItem(item))
     dispatch(postData(newItem))
@@ -26,7 +25,6 @@ function Simplecart() {
 
   function handleShowItem(data) {
     dispatch(showDetail(data))
-    // localStorage.setItem("detailedItem", data);
   }
 
 
@@ -50,8 +48,7 @@ function Simplecart() {
   }
   return (
     <Box id='simpleCartBox' sx={{
-      position: 'absolute', zIndex: '10', left: '1400px', top: '80px', borderRadius: '7px', borderColor: 'lightgray', padding: '10px'
-
+      zIndex: '10', left: '1400px', top: '80px', borderRadius: '7px', borderColor: 'lightgray', padding: '10px'
     }}>
       {cartArr}
     </Box>

@@ -8,11 +8,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import '../../assets/style/detail.css'
 
 
-// const saved = JSON.parse(localStorage.getItem('detailedPageItem'))
-// console.log('SAVED STUFF', saved)
 
 function Details() {
   const dispatch = useDispatch();
+
+  //------------------PULLING FROM SLICE------------------//
+  const singleDetailItem = useSelector(state => state.detail.detailItems);
 
   function handleAddToCart(data) {
     if (data.inventory === 0) {
@@ -24,13 +25,7 @@ function Details() {
 
   }
 
-
-
-
-  const singleDetailItem = useSelector(state => state.detail.detailItems);
-  // const singleDetailItem = JSON.parse(localStorage.getItem("detailedPageItem"))
   let results = [];
-  // console.log('displayResults', singleDetailItem)
   if (singleDetailItem.length > 0) {
     results = singleDetailItem.map(item => (
 

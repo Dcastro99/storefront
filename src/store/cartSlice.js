@@ -33,16 +33,10 @@ export const cartSlice = createSlice({
     },
 
     deleteItem(state, action) {
-      console.log('delete item', action.payload)
       let itemToBeDeleted = action.payload._id;
-
       state.cartItems = state.cartItems.filter(x => x._id !== itemToBeDeleted)
       state.count = state.cartItems.length;
-
     }
-
-
-
   }
 });
 

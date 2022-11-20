@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
+//------------PULLING ALL PRODUCTS FROM MONGO-DB------
 const url = process.env.REACT_APP_HEROKU_URL;
-
-
 
 const initialState = {
   detailItems: [],
@@ -15,22 +13,14 @@ const initialState = {
   updatedItem: ''
 }
 
-
-
-
+//---------------AXIOS CALL TO 'GET' ALL PRODUCTS------------------//
 export const getStoreItems = createAsyncThunk('products/getStoreItems', async (thunkAPI) => {
   try {
-    // console.log('what are you?', item);
-    // console.log('thunkAPI', thunkAPI);
-    // console.log('--------...>>>', thunkAPI.getState());
-    // thunkAPI.dispatch(openModal());
     const res = await axios(url);
-
     let arr = [];
     for (const items of res.data) {
       arr.push(items)
     }
-    // console.log('RESPONSE FROM MONGO', arr)
     return arr;
   } catch (error) {
     return thunkAPI.rejectWithValue('something went wrong');
@@ -38,46 +28,28 @@ export const getStoreItems = createAsyncThunk('products/getStoreItems', async (t
 });
 
 
-
-
-
-
-
-
-
 export const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
     selectCategory(state, action) {
-
       state.category = action.payload;
-
-
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
-      // state.productSelected = state.category === 'all' ? state.getStoreItems : state.getStoreItems.filter
     },
 
-
     productDecrement(state, action) {
-      // console.log('item', action.payload)
       let item = state.allProducts.find(x => x._id === action.payload._id);
       item.inventory--;
       state.updatedItem = item;
-
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
-        // state.allProducts = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
-
-
     },
 
     productIncrement(state, action) {
       let item = state.allProducts.find(x => x.name === action.payload.name);
       item.inventory++;
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
-        // state.allProducts = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
 
       state.updatedItem = item;
@@ -104,6 +76,7 @@ export const productSlice = createSlice({
 
 });
 
+//---------------AXIOS CALL TO 'POST' UPDATE------------------//
 export const postData = createAsyncThunk(
   "type/postData",
   async (data) => {
@@ -117,8 +90,6 @@ export const postData = createAsyncThunk(
         data: data,
       };
       let res = await axios(config);
-
-      console.log('response From AXIOS POST', res)
       return res.data;
     } catch (err) {
       console.error(err)

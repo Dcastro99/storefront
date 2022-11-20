@@ -2,27 +2,21 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Box, Typography, Button, Paper, Grid, TextField } from '@mui/material';
 import { cartSlice } from '../../store/cartSlice';
-// import IconButton from '@mui/material/IconButton';
-// import CloseIcon from '@mui/icons-material/Close';
 import { productIncrement, postData } from '../../store/productSlice'
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
-// import AlertComplete from './alert'
 import '../../assets/style/checkout.css'
 
-
+// ---------------- ALERT FOR CHECKOUT----------------//
 export function Alerts() {
   return (
     <Box sx={{ width: '100%', backgroundColor: 'rgba(109, 249, 140, 0.1)', borderRadius: '7px' }}>
-
       <Alert
         variant="outlined"
         severity="success"
         sx={{ mb: 2 }}
       >
         Order Complete- <strong>Thank you for your purchase!</strong>
-
       </Alert>
-
     </Box>
   );
 }
@@ -32,17 +26,19 @@ function Checkout() {
   const dispatch = useDispatch();
   const [alert, useAlert] = useState('');
 
-
+  // ---------------- PULLING FROM SLICE----------------//
   const newItem = useSelector(state => state.products.updatedItem);
   const cartItems = useSelector(state => state.cart.cartItems);
   const total = cartItems.reduce((total, items) => total + items.price, 0)
 
+  // ---------------- DELETE (also sends to MONGO-DB)----------------//
   function deleteItem(id) {
-    // console.log('delete cart is working', id)
     dispatch(productIncrement(id))
     dispatch(cartSlice.actions.deleteItem(id))
     dispatch(postData(newItem))
   }
+
+
   function ClearOut() {
     useAlert('');
   }
@@ -56,18 +52,17 @@ function Checkout() {
 
 
 
-
-
   let cartArr = [];
   if (cartItems.length > 0) {
     cartArr = cartItems.map(item => (
       <>
         <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Typography sx={{ fontWeight: 'bold', fontSize: '15px' }}>
+            <img src={item.image} style={{ width: '50px', height: '50px', borderRadius: '50px', border: 'none', marginRight: '15px' }} alt={item.id} />
+            <Typography sx={{ display: 'flex', fontWeight: 'bold', fontSize: '15px', alignItems: 'center' }}>
               {item.name}
             </Typography>
-            <Typography sx={{ marginLeft: '40px', color: 'rgb(60, 201, 226)' }}>
+            <Typography sx={{ display: 'flex', marginLeft: '40px', color: 'rgb(60, 201, 226)', alignItems: 'center' }}>
               ${item.price}
             </Typography>
           </Box>
