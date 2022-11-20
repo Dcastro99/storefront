@@ -9,7 +9,7 @@ import '../../assets/style/storefront.css'
 
 export default function storefront() {
   return (
-    <Box className='storeFrontBox' sx={{ position: 'relative' }}>
+    <Box className='storeFrontBox' sx={{ position: 'relative' }} >
       <SimpleCart />
       <Categories />
       <CurrentCategory />

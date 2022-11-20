@@ -1,15 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Typography, Button, Paper, Grid, TextField } from '@mui/material';
+import { Alert, Box, Typography, Button, Paper, Grid, TextField } from '@mui/material';
 import { cartSlice } from '../../store/cartSlice';
+// import IconButton from '@mui/material/IconButton';
+// import CloseIcon from '@mui/icons-material/Close';
 import { productIncrement, postData } from '../../store/productSlice'
 import DeleteTwoTone from '@mui/icons-material/DeleteTwoTone';
+// import AlertComplete from './alert'
 import '../../assets/style/checkout.css'
+
+
+export function Alerts() {
+  return (
+    <Box sx={{ width: '100%', backgroundColor: 'rgba(109, 249, 140, 0.1)', borderRadius: '7px' }}>
+
+      <Alert
+        variant="outlined"
+        severity="success"
+        sx={{ mb: 2 }}
+      >
+        Order Complete- <strong>Thank you for your purchase!</strong>
+
+      </Alert>
+
+    </Box>
+  );
+}
+
 
 function Checkout() {
   const dispatch = useDispatch();
+  const [alert, useAlert] = useState('');
+
 
   const newItem = useSelector(state => state.products.updatedItem);
+  const cartItems = useSelector(state => state.cart.cartItems);
+  const total = cartItems.reduce((total, items) => total + items.price, 0)
 
   function deleteItem(id) {
     // console.log('delete cart is working', id)
@@ -17,10 +43,19 @@ function Checkout() {
     dispatch(cartSlice.actions.deleteItem(id))
     dispatch(postData(newItem))
   }
+  function ClearOut() {
+    useAlert('');
+  }
 
-  const cartItems = useSelector(state => state.cart.cartItems);
-  // console.log('items in checkout---->', cartItems)
-  const total = cartItems.reduce((total, items) => total + items.price, 0)
+  setTimeout(ClearOut, 10000)
+
+
+  function SubmitAlert() {
+    useAlert(Alerts)
+  }
+
+
+
 
 
   let cartArr = [];
@@ -59,9 +94,14 @@ function Checkout() {
               <div id='mainBox'></div>
               {cartArr}
             </Box>
+
             <Typography sx={{ marginLeft: '600px', border: 'solid 2px', padding: '10px', borderRadius: '7px', borderColor: 'lightgray' }} >
               Total: ${total}
             </Typography>
+
+            <Box elevation={6}>
+              {alert}
+            </Box>
 
             <Grid container spacing={2} sx={{ marginTop: '50px' }}>
               <Grid item xs={12} sm={6}>
@@ -94,7 +134,9 @@ function Checkout() {
 
             <Grid container alignItems="center" justify="center" spacing={5}>
               <Grid item>
-                <Button sx={{ color: 'salmon', marginTop: '20px' }}  >Place Your Order</Button>
+
+                <Button sx={{ color: 'salmon', marginTop: '20px' }} onClick={() => SubmitAlert()} >Place Your Order</Button>
+
               </Grid>
 
 
