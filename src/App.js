@@ -7,7 +7,6 @@ import Header from './components/header/index.js'
 import Footer from './components/footer/index.js'
 import { getStoreItems } from '../src/store/productSlice'
 import { useDispatch, useSelector } from 'react-redux';
-// import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Chance from 'chance';
 const chance = new Chance();
@@ -37,7 +36,6 @@ function App() {
     return (
       <div className='loading'>
         <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '400px' }} spacing={4} >
-          {/* <CircularProgress color="secondary" /> */}
           <Box sx={{ fontSize: '80px' }}>{fun}</Box>
         </Box>
       </div>
