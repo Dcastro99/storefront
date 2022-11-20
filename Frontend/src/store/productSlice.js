@@ -1,9 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// const allProducts = [];
+
+
 const url = process.env.REACT_APP_HEROKU_URL;
 
-export const getStoreItems = createAsyncThunk('products/getStoreItems', async (item, thunkAPI) => {
+
+
+const initialState = {
+  detailItems: [],
+  productSelected: [],
+  category: '',
+  allProducts: [],
+  isLoading: true,
+  updatedItem: ''
+}
+
+
+
+
+export const getStoreItems = createAsyncThunk('products/getStoreItems', async (thunkAPI) => {
   try {
     // console.log('what are you?', item);
     // console.log('thunkAPI', thunkAPI);
@@ -22,39 +37,9 @@ export const getStoreItems = createAsyncThunk('products/getStoreItems', async (i
   }
 });
 
-export const postData = createAsyncThunk(
-  "type/postData",
-  async (data) => {
-    try {
-
-      const config = {
-        method: 'put',
-        // baseURL: 'http://localhost:3080',
-        baseURL: process.env.REACT_APP_HEROKU_URL,
-        url: `/item/${data._id}`,
-        data: data,
-      };
-      await axios(config);
-
-      // console.log('response From AXIOS POST', res)
-      // return res.data;
-    } catch (err) {
-      console.error(err)
-    }
-  }
-);
 
 
 
-
-const initialState = {
-  detailItems: [],
-  productSelected: [],
-  category: '',
-  allProducts: [],
-  isLoading: true,
-  updatedItem: ''
-}
 
 
 
@@ -65,10 +50,9 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     selectCategory(state, action) {
-      // console.log('catTags in productslice', action.payload)
+
       state.category = action.payload;
-      // state.productSelected = state.category === 'all' ? state.productSelected : state.productSelected.filter
-      //   ((x) => x.category === state.category);
+
 
       state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter
         ((x) => x.category === state.category);
@@ -119,6 +103,29 @@ export const productSlice = createSlice({
   },
 
 });
+
+export const postData = createAsyncThunk(
+  "type/postData",
+  async (data) => {
+    try {
+
+      const config = {
+        method: 'put',
+        // baseURL: 'http://localhost:3080',
+        baseURL: process.env.REACT_APP_HEROKU_URL,
+        url: `/item/${data._id}`,
+        data: data,
+      };
+      let res = await axios(config);
+
+      console.log('response From AXIOS POST', res)
+      return res.data;
+    } catch (err) {
+      console.error(err)
+    }
+  }
+);
+
 
 export const { selectCategory, showDetail, productIncrement, productDecrement } = productSlice.actions;
 
