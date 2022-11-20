@@ -48,7 +48,7 @@ function App() {
       <Routes>
         <>
           <Route path='/' element={<Storefront />} />
-          <Route exact path='/details/:id' element={<Details />} />
+          <Route exact path='/details' element={<Details />} />
           <Route exact path='/checkout' element={<Checkout />} />
         </>
       </Routes>
