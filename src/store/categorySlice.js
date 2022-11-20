@@ -17,7 +17,7 @@ export const getStoreItems = createAsyncThunk('products/getStoreItems', async (i
     for (const items of res.data) {
       arr.push(items.category)
     }
-    console.log('RESPONSE FROM MONGO', arr)
+    // console.log('RESPONSE FROM MONGO', arr)
     return arr;
   } catch (error) {
     return thunkAPI.rejectWithValue('something went wrong');
@@ -44,12 +44,12 @@ export const categorySlice = createSlice({
       state.isLoading = true;
     },
     [getStoreItems.fulfilled]: (state, action) => {
-      console.log('fullfilled action!', action.payload);
+      // console.log('fullfilled action!', action.payload);
       state.isLoading = false;
       state.categoryTabs = action.payload;
     },
     [getStoreItems.rejected]: (state, action) => {
-      console.log('Thunk action', action);
+      // console.log('Thunk action', action);
       state.isLoading = false;
     },
   }

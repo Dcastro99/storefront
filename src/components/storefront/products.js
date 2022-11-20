@@ -29,65 +29,37 @@ const styles = {
 
 function Products() {
   const dispatch = useDispatch();
-  // const [updated, setUpdate] = useState('');
   const newItem = useSelector(state => state.products.updatedItem);
-  // let x = updated.inventory;
-  // const value = x--;
 
-  // const increment = {
-  //   _id: updated._id,
-  //   name: updated.name,
-  //   image: updated.image,
-  //   inventory: `${x}`,
-  //   price: updated.price,
-  //   description: updated.description,
-  //   caegory: updated.category
-  // }
-
-  // console.log('HELLOOOOO??', increment)
+  //---------------SENNDING TO MONGO-DB--------------//
   function getNewItem() {
-
-
     dispatch(postData(newItem))
   }
 
-  //----------------- ADD TO ACRT HANDLER --------------------//
-
+  //----------------- ADD TO ACRT HANDLER -----------------//
   function handleAddToCart(data) {
-    console.log('sending to product Slice!!!', data)
     if (data.inventory === 0) {
       console.log(data.name, 'Out of Stock')
-
     } else {
-      // setUpdate(data)
-
       dispatch(productSlice.actions.productDecrement(data))
       dispatch(cartSlice.actions.addToCart(data))
-
     }
 
     getNewItem()
   }
-  // console.log('newITEM!!', newItem)
+
+
   function handleShowItem(data) {
-    // console.log('headed to deatil page', data)
     dispatch(showDetail(data))
   }
 
 
   const products = useSelector(state => state.products.productSelected);
 
-  // console.log('all products front', products)
-
-
   let productArr = [];
 
-  // console.log('arr', productArr)
   if (products.length > 0) {
-
     productArr = products.map(item => (
-
-
       <Card key={item._id} sx={styles.card}>
         <CardMedia image={item.image} sx={{ height: '180px', width: '180px', borderRadius: '4px' }} />
         <Box sx={styles.box}>
@@ -104,8 +76,6 @@ function Products() {
             <Button href={`/details/${item._id}`} sx={{ color: 'lightblue' }} value={item} onClick={() => handleShowItem(item)}>Details</Button>
           </Stack>
         </Box>
-
-
       </Card>
     ))
   }

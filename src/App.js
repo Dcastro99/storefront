@@ -7,10 +7,13 @@ import Header from './components/header/index.js'
 import Footer from './components/footer/index.js'
 import { getStoreItems } from '../src/store/productSlice'
 import { useDispatch, useSelector } from 'react-redux';
+
 import Box from '@mui/material/Box';
+import '../src/assets/style/simpleCart.css'
 import Chance from 'chance';
 const chance = new Chance();
 
+//----------ISLOADING FUN----------//
 let fun = chance.pickone
   (['You Better Buy SOMETHING!!!!!!!',
     'I know your Bank Account Number',

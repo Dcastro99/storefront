@@ -5,18 +5,15 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import '../../assets/style/header.css'
 
 export default function Header() {
+  //-------PULLING FROM SLICE--------------//
   const cartCount = useSelector(state => state.cart.count)
 
-
-
-  // console.log('count', cartCount)
-
+  //--------CLEARING OUT LOCALHOST FOR DETAILS PAGE -------------//
   const clearLocal = (e) => {
     localStorage.removeItem('persist:detail');
   }
 
   return (
-
     <Box className='headerBox' maxWidth='l' sx={{ p: 2, borderRadius: '7px ', border: 'none' }}>
       <Link fontSize={'40px'} href="/" underline="hover" sx={{ color: 'grey' }} onClick={clearLocal}>
         THE SHOP
