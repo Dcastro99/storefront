@@ -101,7 +101,7 @@ function Products() {
           <>````````````````````````</>
           <Stack direction="row" spacing={2}>
             <Button sx={{ color: 'salmon' }} value={item} onClick={() => handleAddToCart(item)}>Add to Cart</Button>
-            <Button href='/details' sx={{ color: 'lightblue' }} value={item} onClick={() => handleShowItem(item)}>Details</Button>
+            <Button href={`/details/${item._id}`} sx={{ color: 'lightblue' }} value={item} onClick={() => handleShowItem(item)}>Details</Button>
           </Stack>
         </Box>
 
