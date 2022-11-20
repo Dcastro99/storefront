@@ -48,8 +48,8 @@ function App() {
       <Routes>
         <>
           <Route path='/' element={<Storefront />} />
-          <Route path='/details/:id' element={<Details />} />
-          <Route path='/checkout' element={<Checkout />} />
+          <Route exact path='/details/:id' element={<Details />} />
+          <Route exact path='/checkout' element={<Checkout />} />
         </>
       </Routes>
       <Footer />
