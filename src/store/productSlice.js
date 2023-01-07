@@ -1,33 +1,36 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-//------------PULLING ALL PRODUCTS FROM MONGO-DB------
+//------------PULLING ALL PRODUCTS FROM MONGO-DB------------//
 const url = process.env.REACT_APP_HEROKU_URL;
 
+//------------INITIAL STATE------------//
 const initialState = {
   detailItems: [],
   productSelected: [],
   category: '',
   allProducts: [],
   isLoading: true,
-  updatedItem: ''
+  updatedItem: '',
+  error: null,
+  status: 'idle'
 }
 
 //---------------AXIOS CALL TO 'GET' ALL PRODUCTS------------------//
 export const getStoreItems = createAsyncThunk('products/getStoreItems', async (thunkAPI) => {
   try {
-    const res = await axios(url);
-    let arr = [];
-    for (const items of res.data) {
-      arr.push(items)
-    }
-    return arr;
+
+    const res = await axios.get(url);
+
+    return [...res.data];
+
   } catch (error) {
     return thunkAPI.rejectWithValue('something went wrong');
   }
+
 });
 
-
+//---------------PRODUCT SLICE------------------//
 export const productSlice = createSlice({
   name: 'products',
   initialState,
@@ -71,6 +74,12 @@ export const productSlice = createSlice({
     builder.addCase(getStoreItems.rejected, (state) => {
       state.isLoading = false;
     })
+    builder.addCase(postData.fulfilled, (state, action) => {
+      state.isLoading = false;
+      console.log('post action', action.payload)
+      // state.updatedItem = action.payload;
+    })
+
 
   },
 
@@ -78,14 +87,14 @@ export const productSlice = createSlice({
 
 //---------------AXIOS CALL TO 'POST' UPDATE------------------//
 export const postData = createAsyncThunk(
+
   "type/postData",
   async (data) => {
     try {
-
       const config = {
         method: 'put',
-        // baseURL: 'http://localhost:3080',
-        baseURL: process.env.REACT_APP_HEROKU_URL,
+        baseURL: 'http://localhost:3080',
+        // baseURL: process.env.REACT_APP_HEROKU_URL,
         url: `/item/${data._id}`,
         data: data,
       };
@@ -93,11 +102,13 @@ export const postData = createAsyncThunk(
       return res.data;
     } catch (err) {
       console.error(err)
+      return data;
     }
   }
 );
 
-
+export const getProductStatus = (state) => state.pruducts.status;
+export const getProductError = (state) => state.pruducts.error;
 export const { selectCategory, showDetail, productIncrement, productDecrement } = productSlice.actions;
 
 export default productSlice.reducer;

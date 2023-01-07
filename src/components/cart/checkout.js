@@ -29,13 +29,25 @@ function Checkout() {
   // ---------------- PULLING FROM SLICE----------------//
   const newItem = useSelector(state => state.products.updatedItem);
   const cartItems = useSelector(state => state.cart.cartItems);
+
   const total = cartItems.reduce((total, items) => total + items.price, 0)
 
   // ---------------- DELETE (also sends to MONGO-DB)----------------//
   function deleteItem(id) {
+    let itemPrice = id.inventory
+    const y = itemPrice++;
+    let itemPicked = {
+      _id: id._id,
+      name: id.name,
+      category: id.category,
+      image: id.image,
+      price: id.price,
+      inventory: itemPrice,
+      description: id.description,
+    }
     dispatch(productIncrement(id))
     dispatch(cartSlice.actions.deleteItem(id))
-    dispatch(postData(newItem))
+    dispatch(postData(itemPicked))
   }
 
 

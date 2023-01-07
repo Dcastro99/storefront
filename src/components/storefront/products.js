@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartSlice } from '../../store/cartSlice';
 import { productSlice, postData } from '../../store/productSlice';
 import { showDetail } from '../../store/detailSlice'
 import { Box, Button, Card, CardMedia, Stack, Typography } from '@mui/material';
-
 //------------ INLINE STYLING ----------------//
 
 
@@ -29,12 +28,20 @@ const styles = {
 
 function Products() {
   const dispatch = useDispatch();
+  const [productUpdated, useProductUpdated] = useState({});
+
   const newItem = useSelector(state => state.products.updatedItem);
 
+
+  console.log('newItem state', newItem)
   //---------------SENNDING TO MONGO-DB--------------//
-  function getNewItem() {
-    dispatch(postData(newItem))
+  function GetNewItem() {
+    useProductUpdated(newItem)
+
   }
+  useEffect(() => {
+    dispatch(postData(productUpdated))
+  }, [dispatch, productUpdated])
 
   //----------------- ADD TO ACRT HANDLER -----------------//
   function handleAddToCart(data) {
@@ -43,10 +50,11 @@ function Products() {
     } else {
       dispatch(productSlice.actions.productDecrement(data))
       dispatch(cartSlice.actions.addToCart(data))
-    }
 
-    getNewItem()
+    }
+    setTimeout(GetNewItem, 2000)
   }
+
 
 
   function handleShowItem(data) {
@@ -55,7 +63,7 @@ function Products() {
 
 
   const products = useSelector(state => state.products.productSelected);
-
+  console.log('all products', products)
   let productArr = [];
 
   if (products.length > 0) {
