@@ -26,6 +26,7 @@ let fun = chance.pickone
   ])
 
 // ;;;---- (O_O) ----;;; //
+//Kinda funny//
 
 function App() {
 
