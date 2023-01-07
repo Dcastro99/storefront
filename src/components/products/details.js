@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { productSlice } from '../../store/productSlice';
+import { productSlice, postData } from '../../store/productSlice';
 import { cartSlice } from '../../store/cartSlice';
 import { useSelector } from 'react-redux'
 import { Box, Button, Card, CardMedia, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
@@ -19,6 +19,18 @@ function Details() {
     if (data.inventory === 0) {
       console.log(data.name, 'Out of Stock')
     } else {
+      let itemPrice = data.inventory
+      const y = itemPrice--;
+      let itemPicked = {
+        _id: data._id,
+        name: data.name,
+        category: data.category,
+        image: data.image,
+        price: data.price,
+        inventory: itemPrice,
+        description: data.description,
+      }
+      dispatch(postData(itemPicked))
       dispatch(productSlice.actions.productDecrement(data))
       dispatch(cartSlice.actions.addToCart(data))
     }

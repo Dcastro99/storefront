@@ -14,9 +14,12 @@ function Simplecart() {
 
   //----------PULLING FROM SLICE----------//
   const newItem = useSelector(state => state.products.updatedItem);
+  console.log('item in state in cart', newItem)
   const cartItems = useSelector(state => state.cart.cartItems);
+  console.log('hey stupid', cartItems)
 
-  //----------DELETE (also sends to MONGO-DB)----------//
+
+  //----------DELETE (also sends to MONGO-DB----------//
   function deleteItem(item) {
     dispatch(productIncrement(item))
     dispatch(cartSlice.actions.deleteItem(item))
@@ -48,7 +51,7 @@ function Simplecart() {
   }
   return (
     <Box id='simpleCartBox' sx={{
-      zIndex: '10', left: '1400px', top: '80px', borderRadius: '7px', borderColor: 'lightgray', padding: '10px'
+      position: 'absolute', zIndex: '10', left: '1400px', top: '80px', borderRadius: '7px', borderColor: 'lightgray', padding: '10px'
     }}>
       {cartArr}
     </Box>
